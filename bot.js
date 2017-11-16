@@ -26,4 +26,9 @@ bot.onText(/\/help/, function (msg) {
   });
 });
 
+bot.onText(/\/todo/, function (msg) {
+  bot.sendMessage(msg.chat.id, 'busy').then(function () {
+    // reply sent!
+  });
+});
 module.exports = bot;
