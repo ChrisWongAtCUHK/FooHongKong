@@ -16,7 +16,7 @@ console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 bot.onText(/\/start/, (msg) => {  
   bot.sendMessage(msg.chat.id, "Welcome", {
   "reply_markup": {
-      "keyboard": [["Sample text", "Second sample"],   ["Keyboard"], ["I'm robot"]]
+      "keyboard": [["Sample text", "Second sample"],   ["Keyboard"], ["I'm robot"], ["hi"]]
       }
   });   
 });
@@ -37,6 +37,13 @@ bot.onText(/\/gg/, function (msg) {
   bot.sendMessage(msg.chat.id, 'Good Game!').then(function () {
     // reply sent!
   });
+});
+
+bot.on('message', (msg) => {
+  var Hi = "hi";
+  if (msg.text.toString().toLowerCase().indexOf(Hi) === 0) {
+    bot.sendMessage(msg.chat.id,"<b>bold</b> \n <i>italic</i> \n <em>italic with em</em> \n <a href=\"http://www.example.com/\">inline URL</a> \n <code>inline fixed-width code</code> \n <pre>pre-formatted fixed-width code block</pre>" ,{parse_mode : "HTML"});
+  }
 });
 
 module.exports = bot;
