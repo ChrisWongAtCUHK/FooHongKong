@@ -31,4 +31,11 @@ bot.onText(/\/todo/, function (msg) {
     // reply sent!
   });
 });
+
+bot.onText(/\/gg/, function (msg) {
+  bot.sendMessage(msg.chat.id, 'Good Game!').then(function () {
+    // reply sent!
+  });
+});
+
 module.exports = bot;
