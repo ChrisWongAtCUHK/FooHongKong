@@ -54,4 +54,14 @@ bot.on('message', (msg) => {
 
     }
 });
+
+bot.on('message', (msg) => {
+    
+  var bye = "bye";
+  if (msg.text.toString().toLowerCase().includes(bye)) {
+    bot.sendMessage(msg.chat.id, "Have a nice day " + msg.from.first_name); 
+  } 
+
+});
+
 module.exports = bot;
