@@ -16,7 +16,7 @@ console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 bot.onText(/\/start/, (msg) => {  
   bot.sendMessage(msg.chat.id, "Welcome", {
   "reply_markup": {
-      "keyboard": [["Sample text", "Second sample"],   ["Keyboard"], ["I'm robot"], ["hi"]]
+      "keyboard": [["Sample text", "Second sample"],   ["Keyboard"], ["I'm robot"], ["hi"], ["location"]]
       }
   });   
 });
@@ -46,4 +46,12 @@ bot.on('message', (msg) => {
   }
 });
 
+bot.on('message', (msg) => {
+    var location = "location";
+    if (msg.text.indexOf(location) === 0) {
+        bot.sendLocation(msg.chat.id,44.97108, -104.27719);
+        bot.sendMessage(msg.chat.id, "Here is the point");
+
+    }
+});
 module.exports = bot;
