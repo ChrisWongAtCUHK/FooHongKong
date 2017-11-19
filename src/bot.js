@@ -64,4 +64,13 @@ bot.on('message', (msg) => {
 
 });
 
+bot.on('message', (msg) => {
+    
+  var what = "idiot";
+  if (msg.text.includes(what)) {
+    bot.kickChatMember(msg.chat.id,  msg.from.id);
+  }    
+
+});
+
 module.exports = bot;
