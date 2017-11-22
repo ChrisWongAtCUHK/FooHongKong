@@ -2,6 +2,7 @@ var token = process.env.TOKEN;
 
 var Bot = require('node-telegram-bot-api');
 var bot;
+var { Client } = require("pg");
 
 if(process.env.NODE_ENV === 'production') {
   bot = new Bot(token);
@@ -22,9 +23,29 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.onText(/\/help/, function (msg) {
-  bot.sendMessage(msg.chat.id, '1234567').then(function () {
-    // reply sent!
+  var client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
   });
+
+  client.connect();
+  client.query('SELECT ID, NAME, SALARY FROM COMPANY;', (err, res) => {
+    if (err) throw err;
+    var resp = [];
+    for (let row of res.rows) {
+      let person = [];
+      for (const prop in row) {
+        person.push(`${prop} : ${row[prop]}`);
+      }
+      resp.push(person.join("\n"));
+    }
+    bot.sendMessage(msg.chat.id, resp.join("\n\n")).then(function(){
+
+    });
+
+    client.end();
+  });
+  
 });
 
 bot.onText(/\/todo/, function (msg) {
