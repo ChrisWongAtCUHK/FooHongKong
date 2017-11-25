@@ -97,7 +97,7 @@ bot.on('message', (msg) => {
 bot.on('message', (msg) => {
     
   var heroku = "heroku";
-  if (msg.text.toString().toLowerCase().includes(bye)) {
+  if (msg.text.toString().toLowerCase().includes(heroku)) {
     bot.sendMessage(msg.chat.id, "Heroku suck."); 
   } 
 
