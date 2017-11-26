@@ -108,8 +108,25 @@ bot.on('message', (msg) => {
   var what = "idiot";
   if (msg.text.includes(what)) {
     bot.kickChatMember(msg.chat.id,  msg.from.id);
-  }    
+  }
 
+});
+
+let begin = false;
+let name = "";
+bot.onText(/\/begin/, (msg) => { 
+  begin = true;
+  bot.sendMessage(msg.chat.id, "Please enter a name."); 
+});
+
+bot.on('message', (msg) => { 
+  if(begin == true){
+    name = msg.text;
+    bot.sendMessage(msg.chat.id, name + " is handsome."); 
+
+    begin = false; 
+    name = "";
+  } 
 });
 
 module.exports = bot;
